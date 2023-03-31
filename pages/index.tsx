@@ -14,10 +14,12 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-const machineStartPrompt = 'Hi, what would you like to know about the Senate\'s proposed "RESTRICT Act"?';
+const machineStartPrompt =
+  'Hi, what would you like to know about the Senate\'s proposed "RESTRICT Act"?';
 const defaultUserQuery = 'What can you tell me about the RESTRICT Act?';
 
-const documentSourceUrl = 'https://www.congress.gov/bill/118th-congress/senate-bill/686';
+const documentSourceUrl =
+  'https://www.congress.gov/bill/118th-congress/senate-bill/686';
 
 export default function Home() {
   const [query, setQuery] = useState<string>(defaultUserQuery);
@@ -173,7 +175,16 @@ export default function Home() {
             Ask about the Senate&rsquo;s RESTRICT Act
           </h1>
           <p className="text-center">
-            Source: <a href={documentSourceUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-500 hover:underline">&quot;S.686 - RESTRICT Act&quot;</a> (55 pages)
+            Source:{' '}
+            <a
+              href={documentSourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 dark:text-blue-500 hover:underline"
+            >
+              &quot;S.686 - RESTRICT Act&quot;
+            </a>{' '}
+            (55 pages)
           </p>
           <main className={styles.main}>
             <div className={styles.cloud}>
