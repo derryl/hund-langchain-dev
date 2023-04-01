@@ -15,13 +15,13 @@ import {
 } from '@/components/ui/accordion';
 
 const machineStartPrompt =
-  'Hi, what would you like to know about the Senate\'s proposed "RESTRICT Act"?';
-const defaultUserQuery = 'What can you tell me about the RESTRICT Act?';
+  'Hi, I am Hünd. How can I help you and your pup today?';
+const defaultUserQuery = 'How do I stop my dog from peeing on the carpet?';
 
 const documentSourceUrl =
   'https://www.congress.gov/bill/118th-congress/senate-bill/686';
 
-export default function Home() {
+export default function Hundbot() {
   const [query, setQuery] = useState<string>(defaultUserQuery);
   const [loading, setLoading] = useState<boolean>(false);
   const [sourceDocs, setSourceDocs] = useState<Document[]>([]);
@@ -83,7 +83,7 @@ export default function Home() {
     const ctrl = new AbortController();
 
     try {
-      fetchEventSource('/api/chat', {
+      fetchEventSource('/api/chat-hund', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -172,20 +172,8 @@ export default function Home() {
       <Layout>
         <div className="mx-auto flex flex-col gap-4">
           <h1 className="text-2xl font-bold leading-[1.1] tracking-tighter text-center">
-            Ask about the Senate&rsquo;s RESTRICT Act
+            Hündbot
           </h1>
-          <p className="text-center">
-            Source:{' '}
-            <a
-              href={documentSourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 dark:text-blue-500 hover:underline"
-            >
-              &quot;S.686 - RESTRICT Act&quot;
-            </a>{' '}
-            (55 pages)
-          </p>
           <main className={styles.main}>
             <div className={styles.cloud}>
               <div ref={messageListRef} className={styles.messagelist}>
@@ -195,7 +183,7 @@ export default function Home() {
                   if (message.type === 'apiMessage') {
                     icon = (
                       <Image
-                        src="/bot-image.png"
+                        src="/dog-sunglasses.png"
                         alt="AI"
                         width="40"
                         height="40"
@@ -265,7 +253,7 @@ export default function Home() {
                   );
                 })}
                 {sourceDocs.length > 0 && (
-                  <div className="p-5">
+                  <div className="p-5 pl-6 answer-sources">
                     <Accordion type="single" collapsible className="flex-col">
                       {sourceDocs.map((doc, index) => (
                         <div key={`SourceDocs-${index}`}>

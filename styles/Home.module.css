@@ -99,7 +99,7 @@
 }
 
 .usermessage {
-  background: #ffffff;
+  background: #e3eef8;
   padding: 1.5rem;
   color: #000;
 }
@@ -125,7 +125,7 @@
 }
 
 .apimessage {
-  background: #f9fafb;
+  background: #ffffff;
   padding: 1.5rem;
   color: #000;
   animation: fadein 0.5s;
