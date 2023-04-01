@@ -177,6 +177,10 @@
   height: 100%;
 }
 
+.answer-sources {
+  padding-left: 80px;
+}
+
 .markdownanswer h1,
 .markdownanswer h2,
 .markdownanswer h3 {

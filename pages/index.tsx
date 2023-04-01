@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, useMemo, useCallback } from 'react';
 import Layout from '@/components/layout';
-import styles from '@/styles/Home.module.css';
+import styles from '@/styles/Hundbot.module.css';
 import { Message } from '@/types/chat';
 import { fetchEventSource } from '@microsoft/fetch-event-source';
 import Image from 'next/image';
@@ -17,6 +17,7 @@ import {
 const machineStartPrompt =
   'Hi, I am Hünd. How can I help you and your pup today?';
 const defaultUserQuery = 'How do I stop my dog from peeing on the carpet?';
+const userQueryPlaceholder = defaultUserQuery;
 
 const documentSourceUrl =
   'https://www.congress.gov/bill/118th-congress/senate-bill/686';
@@ -221,7 +222,7 @@ export default function Hundbot() {
                       </div>
                       {message.sourceDocs && (
                         <div
-                          className="p-5"
+                          className="pl-6 ml-6 answer-sources"
                           key={`sourceDocsAccordion-${index}`}
                         >
                           <Accordion
@@ -253,7 +254,7 @@ export default function Hundbot() {
                   );
                 })}
                 {sourceDocs.length > 0 && (
-                  <div className="p-5 pl-6 answer-sources">
+                  <div className="answer-sources">
                     <Accordion type="single" collapsible className="flex-col">
                       {sourceDocs.map((doc, index) => (
                         <div key={`SourceDocs-${index}`}>
@@ -287,9 +288,7 @@ export default function Hundbot() {
                     id="userInput"
                     name="userInput"
                     placeholder={
-                      loading
-                        ? 'Waiting for response...'
-                        : 'What is this legal case about?'
+                      loading ? 'Waiting for response...' : userQueryPlaceholder
                     }
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}

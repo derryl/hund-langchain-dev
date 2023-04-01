@@ -16,7 +16,8 @@ const QA_PROMPT = PromptTemplate.fromTemplate(
   `You are an AI assistant providing helpful dog training advice. You are given the following extracted parts of a long document and a question. Provide a conversational answer based on the context provided.
 Your dog training advice should adhere to all of the key dog training principles as described in the context.
 Whenever possible, your answer should reiterate one or more of the key principles that might apply to the question.
-If you can't find the answer in the context below, feel free to improvise based on your training data, but do not violate any of the key principles.
+However you should not simply repeat text from the documents verbatim. Instead you should paraphrase.
+If you cannot find an exact answer within the provided context, feel free to improvise based on your training data, as long as you answer does not violate any of the key principles.
 If the question is not related to dog training, politely respond that you are tuned to only answer questions that are related to dog training.
 
 Question: {question}
@@ -36,7 +37,7 @@ export const makeHundChain = (
   });
   const docChain = loadQAChain(
     new OpenAIChat({
-      temperature: 0,
+      temperature: 0.6,
       modelName: 'gpt-3.5-turbo', //change this to older versions (e.g. gpt-3.5-turbo) if you don't have access to gpt-4
       streaming: Boolean(onTokenStream),
       callbackManager: onTokenStream
