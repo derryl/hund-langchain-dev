@@ -18,8 +18,12 @@ export default function Hund() {
 
   return (
     <Layout>
-      <button onClick={handleClick}>Click me</button>
-      {response && <p>{response}</p>}
+      <div className="mx-auto flex flex-col gap-4">
+        <button onClick={handleClick}>Click me</button>
+        <div className="textarea hund-server-output">
+          {response && <code>{JSON.stringify(response)}</code>}
+        </div>
+      </div>
     </Layout>
   );
 }

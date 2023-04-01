@@ -1,3 +1,4 @@
+import { queryMarkdownIndex } from '@/utils/queryMarkdownIndex';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -5,7 +6,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   try {
-    const data = 'success!';
+    const data = await queryMarkdownIndex();
 
     res.status(200).json({ data });
   } catch (error) {

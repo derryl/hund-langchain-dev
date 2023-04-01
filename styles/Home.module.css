@@ -18,6 +18,10 @@
   position: relative;
 }
 
+.hund-server-output {
+  max-width: 75vw;
+}
+
 .textarea {
   position: relative;
   resize: none;
