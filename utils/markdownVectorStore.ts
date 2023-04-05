@@ -9,7 +9,8 @@ import { text } from 'stream/consumers';
 // Vector store - https://js.langchain.com/docs/modules/indexes/vector_stores/integrations/hnswlib
 // Text splitting - https://js.langchain.com/docs/modules/indexes/text_splitters/examples/recursive_character
 
-const SOURCE_FILE = 'docs/hund/key-principles.txt';
+// const SOURCE_FILE = 'docs/hund/key-principles.txt';
+const SOURCE_FILE = 'docs/hund/key-principles-abridged.txt';
 const VECTORSTORE_SAVE_LOCATION = 'vectorstore';
 
 // Load index from disk
@@ -28,7 +29,7 @@ async function getVectorStoreFromDisk(): Promise<HNSWLib | null> {
 }
 
 // Create index from documents (and attempt to save to disk)
-async function createVectorStore(
+export async function createVectorStore(
   documents: Document[],
 ): Promise<HNSWLib | null> {
   try {
@@ -57,14 +58,21 @@ async function saveVectorStore(vectorStore: HNSWLib): Promise<HNSWLib | null> {
 }
 
 // Load a TXT file from disk + split it into chunks
-export const loadMarkdownChunks = async (): Promise<Document[] | null> => {
+export const loadMarkdownChunks = async (
+  path = SOURCE_FILE,
+): Promise<Document[] | null> => {
   try {
-    // Load the source file
+    // Load the source file as a Document[]
     const loader = new TextLoader(SOURCE_FILE);
     const rawText: Document[] = await loader.load();
 
-    // Split the source Document[] into chunks (a list of Document[])
-    const splitter = new RecursiveCharacterTextSplitter();
+    console.log(`loaded: ${SOURCE_FILE}`);
+
+    // Split the single input Document[] into a bunch of Documents
+    const splitter = new RecursiveCharacterTextSplitter({
+      chunkSize: 250, // default: 4000
+      chunkOverlap: 50, // default: 200
+    });
     const textChunks = await splitter.splitDocuments(rawText);
 
     return textChunks;

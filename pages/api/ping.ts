@@ -1,4 +1,8 @@
-import { queryMarkdownIndex } from '@/utils/queryMarkdownIndex';
+import {
+  createVectorStore,
+  getMarkdownStore,
+  loadMarkdownChunks,
+} from '@/utils/markdownVectorStore';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -6,7 +10,10 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   try {
-    const data = await queryMarkdownIndex();
+    const store = await getMarkdownStore();
+
+    const data = store;
+    // const data = await createVectorStore(textChunks);
 
     res.status(200).json({ data });
   } catch (error) {
